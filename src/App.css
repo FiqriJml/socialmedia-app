@@ -1,10 +1,8 @@
 .editor {
-    border: solid 1px gray;
-    width: 300px;
-    height: 100px;
-    padding: 6px;
-    overflow: scroll;
+    /* width: 100%; */
+      max-width:500;
     font-size: 0.85rem;
+    outline: 0px solid transparent;
   }
   [contenteditable][placeholder]:empty:before {
     content: attr(placeholder);

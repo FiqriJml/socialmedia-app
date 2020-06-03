@@ -14,10 +14,13 @@ import CardActions from '@material-ui/core/CardActions';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CommentIcon from '@material-ui/icons/Comment';
 
+import TextareaAutosize from 'react-textarea-autosize';
+
 import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth:500,
+      marginTop: 16,
     },
     avatar: {
       backgroundColor: blue[500],
@@ -29,9 +32,14 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 20,
     },
     comment: {
-      fontSize: '0.85rem',
+      padding: 0,
+      fontSize: '0.875rem',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       width: '100%',
       outline: '0px solid transparent',
+      border: 0,
+      resize: 'none !important',
+      backgroundColor: 'transparent',
     },
     cardActions: {
       paddingBottom: 0,
@@ -85,7 +93,11 @@ export default function Story() {
         {/* <InputBase
            inputProps={{style: {fontSize: '0.85rem'}}}
            className={classes.comment} placeholder="komentari..."  /> */}
-           <div className={classes.comment} contentEditable placeholder="komentari..."></div>
+           {/* <textarea resize className={classes.comment} contentEditable placeholder="komentari..."></textarea> */}
+           <TextareaAutosize className= {classes.comment}
+            minRows={1}
+            placeholder="komentari..."
+            />
       </form>
     </Card>
   );
