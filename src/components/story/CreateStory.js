@@ -4,7 +4,6 @@ import AddIcon from '@material-ui/icons/AddCircle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import TextArea from 'react-textarea-autosize';
@@ -25,9 +24,13 @@ const useStyles = makeStyles(() => ({
     border: 0,
     resize: 'none !important',
     backgroundColor: 'transparent',
+    overflow: 'hidden',
   },
   panelTextarea: {
-    padding: '8px 16px 6px 16px',
+    border: '1px solid',
+    borderRadius: 4,
+    borderColor: grey[200],
+    padding: '9px 16px 6px 16px',
     backgroundColor: grey[50],
   }
 }))

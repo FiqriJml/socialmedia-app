@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth:500,
       marginTop: 16,
+      marginBottom: 16,
     },
     avatar: {
       backgroundColor: blue[500],
