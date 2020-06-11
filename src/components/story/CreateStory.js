@@ -11,6 +11,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { grey } from '@material-ui/core/colors';
 import { Divider } from '@material-ui/core';
 
+import { connect } from "react-redux";
+import { createStory } from "../../store/actions/storyActions";
+
 const useStyles = makeStyles(() => ({
   root: {
     width: 800
@@ -35,8 +38,10 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function CreateStory() {
+function CreateStory(props) {
   const [open, setOpen] = React.useState(false);
+
+  const [state, setState] = React.useState({content: ''});
   const classes = useStyles();
 
   const handleClickOpen = () => {
@@ -44,8 +49,13 @@ export default function CreateStory() {
   };
 
   const handleClose = () => {
+    props.createStory(state);
     setOpen(false);
   };
+  const handleChange = (e) => {
+    const newState = { [e.target.id]: e.target.value };
+    setState(newState); // Now it works
+  }
   return (
     <Fragment>
       <Button onClick={handleClickOpen} disableElevation variant="contained" color="primary" startIcon={<AddIcon />} >
@@ -58,8 +68,12 @@ export default function CreateStory() {
           <br/>
           <div className={classes.panelTextarea}>
             <TextArea 
+            autoFocus
+            id="content"
+              onChange={handleChange}
               className={classes.textarea}
-              placeholder="Tulis cerita anda disini...">
+              placeholder="Tulis cerita anda disini..."
+              >
 
             </TextArea>
           </div>
@@ -73,3 +87,11 @@ export default function CreateStory() {
     </Fragment>
   );
 }
+
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    createStory: (story) => dispatch(createStory(story))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateStory);

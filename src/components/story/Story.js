@@ -55,9 +55,11 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'hidden'
     },
   }));
-export default function Story() {
+export default function Story(props) {
 
-    const classes = useStyles();
+  const classes = useStyles();
+
+  const {story} = props;
   
   return (
     <Card className={classes.root}>
@@ -72,13 +74,14 @@ export default function Story() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={story.userFirstName+ ' ' + story.userLastName}
         subheader="September 14, 2016"
       />
       <CardContent>
         <Typography variant="body2" color="textPrimary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {/* This impressive paella is a perfect party dish and a fun meal to cook together with your
+          guests. Add 1 cup of frozen peas along with the mussels, if you like. */}
+          {story.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
@@ -91,10 +94,6 @@ export default function Story() {
       </CardActions>
       <Divider/>
       <form className={classes.form} noValidate autoComplete="off">
-        {/* <InputBase
-           inputProps={{style: {fontSize: '0.85rem'}}}
-           className={classes.comment} placeholder="komentari..."  /> */}
-           {/* <textarea resize className={classes.comment} contentEditable placeholder="komentari..."></textarea> */}
            <TextareaAutosize className= {classes.comment}
             minRows={1}
             placeholder="komentari..."
