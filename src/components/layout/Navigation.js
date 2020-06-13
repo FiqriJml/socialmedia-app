@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { signOut } from '../../store/actions/authActions';
 import {connect} from 'react-redux';
 
+import {Link} from 'react-router-dom';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -20,10 +22,28 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  link: {
+    color: 'inherit', textDecoration: 'inherit'
+  }
 }));
 
 function Navigation(props) {
   const classes = useStyles();
+
+  const {auth } = props;
+  console.log(auth);
+  const nav_links = auth.uid ? 
+    <Button color="inherit" onClick={props.signOut}>
+      <Link to='/signin' className={classes.link}>Logout</Link>
+    </Button>: 
+    <Fragment>
+      <Link to='/signup' className={classes.link}>
+        <Button color="inherit">Signup</Button>
+      </Link>
+      <Link to='/signin' className={classes.link}>
+        <Button color="inherit">Login</Button>
+      </Link>
+    </Fragment>;
 
   return (
     <div className={classes.root}>
@@ -33,9 +53,9 @@ function Navigation(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Physikol
+            <Link to='/' className={classes.link}>Physikol</Link>
           </Typography>
-          <Button color="inherit" onClick={props.signOut}>Logout</Button>
+          {nav_links} 
         </Toolbar>
       </AppBar>
     </div>
@@ -47,5 +67,10 @@ const mapDispatchToProps = (dispatch) => {
     signOut: () => dispatch(signOut())
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  }
+}
 
-export default connect(null, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

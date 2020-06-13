@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 
+import Navigation from '../layout/Navigation';
 import {connect} from 'react-redux';
 
 import {signIn} from '../../store/actions/authActions';
@@ -44,6 +45,9 @@ class SignIn extends Component {
     render() {
       const { classes, authError } = this.props;
         return (
+          <Fragment>
+            
+          <Navigation/>
           <Grid
             container
             spacing={0}
@@ -74,6 +78,7 @@ class SignIn extends Component {
             </Grid>   
 
           </Grid> 
+          </Fragment>
         )
     }
 }

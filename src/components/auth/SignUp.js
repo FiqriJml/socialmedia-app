@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
+
+import Navigation from '../layout/Navigation';
 
 const useStyles = ((theme) => ({
   formControl: {
@@ -57,7 +59,9 @@ class SignUp extends Component {
     render() {
       const { classes } = this.props;
         return (
-          <Grid
+          <Fragment>
+            <Navigation/>
+            <Grid
             container
             spacing={0}
             direction="column"
@@ -107,6 +111,7 @@ class SignUp extends Component {
             </Grid>   
 
           </Grid> 
+        </Fragment>
         )
     }
 }

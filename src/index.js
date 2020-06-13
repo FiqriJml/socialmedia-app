@@ -6,11 +6,11 @@ import * as serviceWorker from './serviceWorker';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore'
-import { ReactReduxFirebaseProvider, getFirebase} from 'react-redux-firebase'
+import { ReactReduxFirebaseProvider, getFirebase, isLoaded} from 'react-redux-firebase'
 import firebase, {fbConfig} from "./config/fbConfig";
 
 const store = createStore(rootReducer, 
@@ -26,10 +26,29 @@ const rrfProps = {
   createFirestoreInstance
 }
 
+// pakai connect
+// const mapStateToProps = (state) => ({
+//   authIsLoaded: state.firebase.auth && state.firebase.auth.isLoaded,
+// });
+// const WaitTillAuth = connect(mapStateToProps)(({ authIsLoaded }) => {
+//   if (!authIsLoaded) return <div>splash screen...</div>;
+//   return (
+//     <App/>
+//   );
+// });
+
+// pakai useSelector atau Hooks
+function AuthIsLoaded({ children }) {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return <div>Loading Screen...</div>;
+      return children
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App/>
+      {/* <WaitTillAuth/> */}
+      <AuthIsLoaded><App /></AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')
