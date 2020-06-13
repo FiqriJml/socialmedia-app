@@ -31,7 +31,6 @@ function Navigation(props) {
   const classes = useStyles();
 
   const {auth } = props;
-  console.log(auth);
   const nav_links = auth.uid ? 
     <Button color="inherit" onClick={props.signOut}>
       <Link to='/signin' className={classes.link}>Logout</Link>

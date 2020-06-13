@@ -7,13 +7,15 @@ import SignIn from './components/auth/SignIn';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import SignUp from './components/auth/SignUp';
 
+import PrivateRoute from './components/PrivateRoute'
+
 
 function App() {
   return (
     <BrowserRouter> 
       <div className="App">
         <Switch>
-          <Route exact path='/' component={Dashboard}/>
+          <PrivateRoute exact path='/' component={Dashboard}/>
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
         </Switch>
