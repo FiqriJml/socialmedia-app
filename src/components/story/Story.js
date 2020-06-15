@@ -17,6 +17,8 @@ import CommentIcon from '@material-ui/icons/Comment';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import Divider from '@material-ui/core/Divider';
+
+import moment from 'moment';
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth:500,
@@ -75,7 +77,7 @@ export default function Story(props) {
           </IconButton>
         }
         title={story.userFirstName+ ' ' + story.userLastName}
-        subheader="September 14, 2016"
+        subheader={moment(story.createdAt.toDate()).calendar()}
       />
       <CardContent>
         <Typography variant="body2" color="textPrimary" component="p">

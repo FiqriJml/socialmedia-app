@@ -10,6 +10,7 @@ import Navigation from '../layout/Navigation';
 import {connect} from 'react-redux';
 
 import {signIn} from '../../store/actions/authActions';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = (() => ({
   paper: {
@@ -43,7 +44,10 @@ class SignIn extends Component {
       this.props.signIn(this.state);
     }
     render() {
-      const { classes, authError } = this.props;
+      const { classes, authError, auth } = this.props;
+      if(auth.uid){
+        return <Redirect to='/'/>
+      }
         return (
           <Fragment>
             
@@ -85,7 +89,8 @@ class SignIn extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
   }
 }
 

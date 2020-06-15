@@ -19,11 +19,19 @@ const store = createStore(rootReducer,
     reduxFirestore(firebase, fbConfig)
   )
 );
+
+const config = {
+  userProfile: 'users', //where profile is stored on db
+  useFirestoreForProfile: true
+}
+
 const rrfProps = {
   firebase,
-  config: fbConfig,
+  config: config,
   dispatch: store.dispatch,
-  createFirestoreInstance
+  createFirestoreInstance,
+  presence: 'presence',
+  sessions: 'sessions'
 }
 
 // pakai connect

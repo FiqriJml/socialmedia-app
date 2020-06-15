@@ -12,6 +12,11 @@ import { Typography } from '@material-ui/core';
 
 import Navigation from '../layout/Navigation';
 
+import {connect} from 'react-redux';
+
+import {signUp} from '../../store/actions/authActions';
+import { Redirect } from 'react-router-dom';
+
 const useStyles = ((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -54,10 +59,14 @@ class SignUp extends Component {
     }
     handleSubmit = e => {
       e.preventDefault()
-      console.log(this.state);
+      console.log('submit')
+      this.props.signUp(this.state);
     }
     render() {
-      const { classes } = this.props;
+      const { classes, authError, auth } = this.props;
+      if(auth.uid){
+        return <Redirect to='/'/>
+      }
         return (
           <Fragment>
             <Navigation/>
@@ -106,6 +115,10 @@ class SignUp extends Component {
                   <div className={classes.formInput}>
                       <Button type="submit" fullWidth variant="contained" color="primary">sign up</Button>
                   </div>
+                  
+                  <div className={classes.title}>
+                    {authError ? <p> {authError} </p> : null}
+                  </div>
                 </form>
               </Paper>
             </Grid>   
@@ -116,4 +129,16 @@ class SignUp extends Component {
     }
 }
 
-export default withStyles(useStyles)(SignUp);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(useStyles)(SignUp));
