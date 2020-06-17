@@ -22,7 +22,8 @@ export default function Notifications() {
   return (
     <div className={classes.root}>
       <Paper elevation={1} >    
-        <Typography>Notifications</Typography>
+        <Typography variant="body1">Notifications</Typography>
+        <Typography variant="body2"><b>Some one</b> add a new <b>story</b> <i>today at 10:56</i> </Typography>
       </Paper>
     </div>
   );
