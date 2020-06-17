@@ -15,7 +15,7 @@ import {compose} from 'redux';
 
 class Dashboard extends Component {
     render() {
-        const { stories } = this.props;
+        const { stories, notifications } = this.props;
         console.log(this.props);
         return (
             <Fragment>
@@ -36,7 +36,7 @@ class Dashboard extends Component {
                 <Grid item sm={1} >
                 </Grid> 
                 <Grid item xs={12} sm >
-                    <Notifications/>
+                    <Notifications notifications={notifications}/>
                 </Grid>     
     
                 </Grid> 
@@ -50,12 +50,14 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         stories: state.firestore.ordered.stories,
+        notifications: state.firestore.ordered.notifications,
     }
 }
 
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        {collection: 'stories', orderBy: ['createdAt', 'desc']}
+        {collection: 'stories', orderBy: ['createdAt', 'desc']},
+        {collection: 'notifications', limit: 3, orderBy: ['time', 'desc']}
     ]),
 )(Dashboard);

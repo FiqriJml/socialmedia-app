@@ -77,7 +77,7 @@ export default function Story(props) {
           </IconButton>
         }
         title={story.userFirstName+ ' ' + story.userLastName}
-        subheader={moment(story.createdAt.toDate()).calendar()}
+        subheader={moment(story.createdAt.toDate()).fromNow()}
       />
       <CardContent>
         <Typography variant="body2" color="textPrimary" component="p">
