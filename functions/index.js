@@ -10,10 +10,9 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 
 const createNotification = ( notification => {
-    admin.firestore().collection('notifications')
-        .add(notification).then(doc => {
-            console.log('notification added', doc);
-    })
+    return admin.firestore().collection('notifications')
+        .add(notification)
+        .then(doc => console.log('notification added', doc));
 })
 
 exports.storyCreated = functions.firestore
@@ -26,4 +25,17 @@ exports.storyCreated = functions.firestore
             time: admin.firestore.FieldValue.serverTimestamp(),
         }
         return createNotification(notification);
+})
+
+exports.userRegistered = functions.auth.user().onCreate(user => {
+    return admin.firestore().collection('users')
+    .doc(user.uid).get().then(doc => {
+        const newUser = doc.data();
+        const notification = {
+            content: 'has been register as user',
+            user: `${newUser.firstName} ${newUser.lastName}`,
+            time: admin.firestore.FieldValue.serverTimestamp(),
+        }
+        return createNotification(notification);
+    })
 })
