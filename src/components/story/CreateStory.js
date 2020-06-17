@@ -49,6 +49,9 @@ function CreateStory(props) {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+  const saveStory = () => {
     props.createStory(state);
     setOpen(false);
   };
@@ -79,7 +82,7 @@ function CreateStory(props) {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose} color="primary">
+          <Button variant="contained" onClick={saveStory} color="primary">
             Kirim
           </Button>
         </DialogActions>
