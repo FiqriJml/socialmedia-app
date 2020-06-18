@@ -17,8 +17,11 @@ import CommentIcon from '@material-ui/icons/Comment';
 import TextareaAutosize from 'react-textarea-autosize';
 
 import Divider from '@material-ui/core/Divider';
-
 import moment from 'moment';
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth:500,
@@ -62,6 +65,16 @@ export default function Story(props) {
   const classes = useStyles();
 
   const {story} = props;
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   
   return (
     <Card className={classes.root}>
@@ -72,9 +85,22 @@ export default function Story(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <div>
+            <IconButton aria-label="settings" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+              <MoreVertIcon/>
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Update</MenuItem>
+              <MenuItem onClick={handleClose}>Delete</MenuItem>
+            </Menu>
+          </div>
+          
         }
         title={story.userFirstName+ ' ' + story.userLastName}
         subheader={moment(story.createdAt.toDate()).fromNow()}
