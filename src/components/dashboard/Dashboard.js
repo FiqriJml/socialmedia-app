@@ -16,7 +16,7 @@ import {compose} from 'redux';
 class Dashboard extends Component {
     render() {
         const { stories, notifications } = this.props;
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <Fragment>
                 <Navigation/>

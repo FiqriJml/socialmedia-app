@@ -24,6 +24,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {connect} from 'react-redux';
 import {deleteStory} from '../../store/actions/storyActions';
 
+import UpdateStory from './UpdateStory'
+
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth:500,
@@ -102,7 +104,7 @@ function Story(props) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Update</MenuItem>
+              <MenuItem onClick={handleClose}><UpdateStory story={story}/></MenuItem>
               <MenuItem onClick={handleDelete}>Delete</MenuItem>
             </Menu>
           </div>

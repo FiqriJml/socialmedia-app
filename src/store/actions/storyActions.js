@@ -28,3 +28,11 @@ export const deleteStory = (story) => {
         })
     }
 }
+
+export const updateStory = (story, storyId) => {
+    return (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('stories').doc(storyId)
+        .update(story)
+    }
+}
