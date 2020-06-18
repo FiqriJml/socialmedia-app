@@ -16,3 +16,15 @@ export const createStory = (story) =>{
         })
     }
 }
+
+export const deleteStory = (story) => {
+    return (dispatch, getState, {getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('stories').doc(story.id).delete()
+        .then(()=> {
+            dispatch({type: 'DELETE_STORY', story})
+        }).catch(err => {
+            dispatch({type: 'DELETE_STORY_ERROR', err})
+        })
+    }
+}

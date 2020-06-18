@@ -1,9 +1,5 @@
 const initState = {
-    stories: [
-        {id: '1', userFirstName: 'Fiqri', userLastName: 'Jamal', content: 'My first Story huhuhu'},
-        {id: '2', userFirstName: 'Fiqri', userLastName: 'Jamal', content: 'My second Story bla bla bla'},
-        {id: '3', userFirstName: 'Rayasa', userLastName: 'kun', content: 'My first Story yeah'},
-    ]
+    stories: []
 }
 const storyReducer = (state= initState, action) => {
     switch(action.type) {
@@ -12,6 +8,12 @@ const storyReducer = (state= initState, action) => {
             return state;
         case 'CREATE_STORY_ERROR':
             console.log('create story error', action.err);
+            return state;
+        case 'DELETE_STORY':
+            console.log('story with id:',action.story.id,' deleted');
+            return state;
+        case 'DELETE_STORY_ERROR':
+            console.log('delete story error:', action.err);
             return state;
         default:
             return state;

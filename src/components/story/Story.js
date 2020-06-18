@@ -21,6 +21,8 @@ import moment from 'moment';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import {connect} from 'react-redux';
+import {deleteStory} from '../../store/actions/storyActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'hidden'
     },
   }));
-export default function Story(props) {
+function Story(props) {
 
   const classes = useStyles();
 
@@ -74,6 +76,10 @@ export default function Story(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleDelete = () => {
+    props.deleteStory(story);
+    handleClose();
   };
   
   return (
@@ -97,7 +103,7 @@ export default function Story(props) {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Update</MenuItem>
-              <MenuItem onClick={handleClose}>Delete</MenuItem>
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
             </Menu>
           </div>
           
@@ -130,3 +136,11 @@ export default function Story(props) {
     </Card>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteStory: (story) => dispatch(deleteStory(story))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Story);
