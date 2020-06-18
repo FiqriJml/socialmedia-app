@@ -71,10 +71,16 @@ function UpdateStory(props) {
           <br/>
           <div className={classes.panelTextarea}>
             <TextArea 
+            value={state.content}
             autoFocus
+            onFocus={(e) => {
+                // untuk mengubah posisi pointer ke akhir kalimat pada textarea
+                const pointer = e.target.value.length;
+                e.target.selectionStart = pointer
+                e.target.selectionEnd = pointer
+            }}
             id="content"
               onChange={handleChange}
-              value={state.content}
               className={classes.textarea}
               placeholder="Tulis cerita anda disini..."
               >
