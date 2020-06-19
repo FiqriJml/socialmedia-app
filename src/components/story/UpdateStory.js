@@ -34,6 +34,9 @@ const useStyles = makeStyles(() => ({
     borderColor: grey[200],
     padding: '9px 16px 6px 16px',
     backgroundColor: grey[50],
+  },
+  update: {
+    padding: '6px 16px'
   }
 }))
 
@@ -61,7 +64,7 @@ function UpdateStory(props) {
   }
   return (
     <Fragment>
-      <span onClick={handleClickOpen}>
+      <span className={classes.update} onClick={handleClickOpen}>
         Update
       </span>
       <Dialog fullWidth open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

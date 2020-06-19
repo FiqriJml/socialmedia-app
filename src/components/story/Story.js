@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 
 import CardActions from '@material-ui/core/CardActions';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import CommentIcon from '@material-ui/icons/Comment';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -25,6 +24,7 @@ import {connect} from 'react-redux';
 import {deleteStory} from '../../store/actions/storyActions';
 
 import UpdateStory from './UpdateStory'
+import CommentButton from './Comment';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: grey[200],
       borderRadius: 20,
     },
-    comment: {
+    commentButton: {
       padding: 0,
       fontSize: '0.875rem',
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
       height: '100%',
       overflow: 'hidden'
     },
+    menuUpdate: {
+      padding: 0,
+    }
   }));
 function Story(props) {
 
@@ -104,7 +107,7 @@ function Story(props) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}><UpdateStory story={story}/></MenuItem>
+              <MenuItem onClick={handleClose} className={classes.menuUpdate}><UpdateStory story={story}/></MenuItem>
               <MenuItem onClick={handleDelete}>Delete</MenuItem>
             </Menu>
           </div>
@@ -124,13 +127,11 @@ function Story(props) {
         <IconButton aria-label="like" >
           <ThumbUpIcon className={classes.button}  />
         </IconButton>
-        <IconButton aria-label="comment">
-          <CommentIcon className={classes.button} />
-        </IconButton>
+          <CommentButton className={classes.button}/>
       </CardActions>
       <Divider/>
       <form className={classes.form} noValidate autoComplete="off">
-           <TextareaAutosize className= {classes.comment}
+           <TextareaAutosize className= {classes.commentButton}
             minRows={1}
             placeholder="komentari..."
             />
