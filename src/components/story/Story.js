@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
-import TextareaAutosize from 'react-textarea-autosize';
+// import TextareaAutosize from 'react-textarea-autosize';
 
 import Divider from '@material-ui/core/Divider';
 import moment from 'moment';
@@ -24,7 +24,8 @@ import {connect} from 'react-redux';
 import {deleteStory} from '../../store/actions/storyActions';
 
 import UpdateStory from './UpdateStory'
-import CommentButton from './Comment';
+import CommentButton from './CreateComment';
+import CommentList from './CommentList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -127,15 +128,16 @@ function Story(props) {
         <IconButton aria-label="like" >
           <ThumbUpIcon className={classes.button}  />
         </IconButton>
-          <CommentButton className={classes.button}/>
+          <CommentButton className={classes.button} story={story} />
       </CardActions>
       <Divider/>
-      <form className={classes.form} noValidate autoComplete="off">
+      {/* <form className={classes.form} noValidate autoComplete="off">
            <TextareaAutosize className= {classes.commentButton}
             minRows={1}
             placeholder="komentari..."
             />
-      </form>
+      </form> */}
+      <CommentList comments={story.comments}/>
     </Card>
   );
 }
